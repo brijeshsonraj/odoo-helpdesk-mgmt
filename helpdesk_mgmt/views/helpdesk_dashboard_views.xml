@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!--                   DASHBOARD ACTION                           -->
+    <!-- ============================================================ -->
+
+    <!-- Dashboard: Team Overview (Default landing page) -->
+    <record id="helpdesk_team_action_dashboard" model="ir.actions.act_window">
+        <field name="name">Helpdesk Overview</field>
+        <field name="res_model">helpdesk.team</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Helpdesk team!
+            </p>
+            <p>
+                Set up teams, define SLA policies, and start managing customer support.
+            </p>
+        </field>
+    </record>
+
+</odoo>

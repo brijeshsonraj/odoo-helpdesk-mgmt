@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Background with rounded corners -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#9B6B9B"/>
+      <stop offset="100%" stop-color="#6B3F6B"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="18" fill="url(#bg)"/>
+
+  <!-- Headset arc (top band) -->
+  <path d="M22 50 A28 28 0 0 1 78 50"
+        fill="none" stroke="white" stroke-width="5.5"
+        stroke-linecap="round"/>
+
+  <!-- Left ear cup -->
+  <rect x="14" y="47" width="13" height="19" rx="5"
+        fill="white"/>
+
+  <!-- Right ear cup -->
+  <rect x="73" y="47" width="13" height="19" rx="5"
+        fill="white"/>
+
+  <!-- Microphone boom arm -->
+  <path d="M73 63 Q73 77 62 77"
+        fill="none" stroke="white" stroke-width="4.5"
+        stroke-linecap="round"/>
+
+  <!-- Microphone head -->
+  <circle cx="59" cy="77" r="4.5" fill="white"/>
+
+  <!-- Ticket badge (bottom-right) — small star-burst shape replaced with a clean rounded rect -->
+  <rect x="54" y="64" width="28" height="17" rx="5"
+        fill="#F7C948"/>
+  <!-- Tick mark inside badge -->
+  <polyline points="60,72 64.5,77 72,67"
+            fill="none" stroke="#6B3F6B" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

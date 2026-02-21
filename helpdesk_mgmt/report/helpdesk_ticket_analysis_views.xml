@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Analysis Pivot View -->
+    <record id="helpdesk_ticket_analysis_view_pivot" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.analysis.pivot</field>
+        <field name="model">helpdesk.ticket.analysis</field>
+        <field name="arch" type="xml">
+            <pivot string="Ticket Analysis" sample="1">
+                <field name="team_id" type="row"/>
+                <field name="create_date" interval="month" type="col"/>
+                <field name="ticket_count" type="measure"/>
+                <field name="response_hours" type="measure"/>
+                <field name="close_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Analysis Graph View -->
+    <record id="helpdesk_ticket_analysis_view_graph" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.analysis.graph</field>
+        <field name="model">helpdesk.ticket.analysis</field>
+        <field name="arch" type="xml">
+            <graph string="Ticket Analysis" sample="1" type="bar">
+                <field name="create_date" interval="month"/>
+                <field name="ticket_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Analysis List View -->
+    <record id="helpdesk_ticket_analysis_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.analysis.list</field>
+        <field name="model">helpdesk.ticket.analysis</field>
+        <field name="arch" type="xml">
+            <list string="Ticket Analysis">
+                <field name="number"/>
+                <field name="name"/>
+                <field name="team_id"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="category_id"/>
+                <field name="priority"/>
+                <field name="stage_id"/>
+                <field name="sla_status"
+                       widget="badge"
+                       decoration-success="sla_status == 'reached'"
+                       decoration-danger="sla_status == 'failed'"
+                       decoration-info="sla_status == 'ongoing'"/>
+                <field name="response_hours" widget="float_time"/>
+                <field name="close_hours" widget="float_time"/>
+                <field name="create_date"/>
+                <field name="date_closed"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Analysis Search View -->
+    <record id="helpdesk_ticket_analysis_view_search" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.analysis.search</field>
+        <field name="model">helpdesk.ticket.analysis</field>
+        <field name="arch" type="xml">
+            <search string="Ticket Analysis">
+                <field name="name"/>
+                <field name="team_id"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="category_id"/>
+                <separator/>
+                <filter string="Open" name="open" domain="[('is_closed', '=', False)]"/>
+                <filter string="Closed" name="closed" domain="[('is_closed', '=', True)]"/>
+                <separator/>
+                <filter string="SLA Reached" name="sla_reached" domain="[('sla_status', '=', 'reached')]"/>
+                <filter string="SLA Failed" name="sla_failed" domain="[('sla_status', '=', 'failed')]"/>
+                <separator/>
+                <filter string="This Month" name="this_month"
+                        domain="[('create_date', '&gt;=', (context_today().replace(day=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Last 30 Days" name="last_30"
+                        domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter string="Team" name="group_team" context="{'group_by': 'team_id'}"/>
+                    <filter string="Assigned To" name="group_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Stage" name="group_stage" context="{'group_by': 'stage_id'}"/>
+                    <filter string="Category" name="group_category" context="{'group_by': 'category_id'}"/>
+                    <filter string="Priority" name="group_priority" context="{'group_by': 'priority'}"/>
+                    <filter string="SLA Status" name="group_sla" context="{'group_by': 'sla_status'}"/>
+                    <filter string="Month" name="group_month" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Analysis Action -->
+    <record id="helpdesk_ticket_analysis_action" model="ir.actions.act_window">
+        <field name="name">Ticket Analysis</field>
+        <field name="res_model">helpdesk.ticket.analysis</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="helpdesk_ticket_analysis_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data to analyze yet.
+            </p>
+            <p>
+                Create some tickets and come back to analyze your helpdesk performance.
+            </p>
+        </field>
+    </record>
+
+</odoo>

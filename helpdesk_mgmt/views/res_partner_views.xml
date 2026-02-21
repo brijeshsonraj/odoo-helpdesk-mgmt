@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Extend Partner Form with Tickets -->
+    <record id="res_partner_view_form_inherit_helpdesk" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.helpdesk</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_helpdesk_tickets" type="object"
+                        class="oe_stat_button" icon="fa-life-ring"
+                        invisible="helpdesk_ticket_count == 0"
+                        groups="helpdesk_mgmt.group_helpdesk_user">
+                    <field name="helpdesk_ticket_count" string="Tickets" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

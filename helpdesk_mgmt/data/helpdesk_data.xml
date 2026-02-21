@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequence for ticket numbers -->
+        <record id="seq_helpdesk_ticket" model="ir.sequence">
+            <field name="name">Helpdesk Ticket</field>
+            <field name="code">helpdesk.ticket</field>
+            <field name="prefix">HDT-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Default Stages -->
+        <record id="helpdesk_stage_new" model="helpdesk.stage">
+            <field name="name">New</field>
+            <field name="sequence">1</field>
+            <field name="fold">0</field>
+            <field name="is_close">0</field>
+        </record>
+
+        <record id="helpdesk_stage_in_progress" model="helpdesk.stage">
+            <field name="name">In Progress</field>
+            <field name="sequence">2</field>
+            <field name="fold">0</field>
+            <field name="is_close">0</field>
+        </record>
+
+        <record id="helpdesk_stage_waiting" model="helpdesk.stage">
+            <field name="name">Waiting for Customer</field>
+            <field name="sequence">3</field>
+            <field name="fold">0</field>
+            <field name="is_close">0</field>
+        </record>
+
+        <record id="helpdesk_stage_resolved" model="helpdesk.stage">
+            <field name="name">Resolved</field>
+            <field name="sequence">4</field>
+            <field name="fold">1</field>
+            <field name="is_close">1</field>
+        </record>
+
+        <record id="helpdesk_stage_cancelled" model="helpdesk.stage">
+            <field name="name">Cancelled</field>
+            <field name="sequence">5</field>
+            <field name="fold">1</field>
+            <field name="is_close">1</field>
+        </record>
+
+        <!-- Default Team -->
+        <record id="helpdesk_team_default" model="helpdesk.team">
+            <field name="name">Customer Support</field>
+            <field name="sequence">1</field>
+            <field name="assignment_method">balanced</field>
+            <field name="use_sla">1</field>
+            <field name="use_rating">1</field>
+            <field name="stage_ids" eval="[
+                (4, ref('helpdesk_stage_new')),
+                (4, ref('helpdesk_stage_in_progress')),
+                (4, ref('helpdesk_stage_waiting')),
+                (4, ref('helpdesk_stage_resolved')),
+                (4, ref('helpdesk_stage_cancelled')),
+            ]"/>
+            <field name="member_ids" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="leader_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- Default Categories -->
+        <record id="helpdesk_category_general" model="helpdesk.category">
+            <field name="name">General Inquiry</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="helpdesk_category_technical" model="helpdesk.category">
+            <field name="name">Technical Issue</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="helpdesk_category_billing" model="helpdesk.category">
+            <field name="name">Billing &amp; Payment</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="helpdesk_category_feature" model="helpdesk.category">
+            <field name="name">Feature Request</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Default Tags -->
+        <record id="helpdesk_tag_bug" model="helpdesk.tag">
+            <field name="name">Bug</field>
+            <field name="color">1</field>
+        </record>
+
+        <record id="helpdesk_tag_improvement" model="helpdesk.tag">
+            <field name="name">Improvement</field>
+            <field name="color">4</field>
+        </record>
+
+        <record id="helpdesk_tag_question" model="helpdesk.tag">
+            <field name="name">Question</field>
+            <field name="color">10</field>
+        </record>
+
+        <record id="helpdesk_tag_critical" model="helpdesk.tag">
+            <field name="name">Critical</field>
+            <field name="color">1</field>
+        </record>
+
+        <!-- Default SLA Policies -->
+        <record id="helpdesk_sla_urgent" model="helpdesk.sla">
+            <field name="name">Urgent Response</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_in_progress"/>
+            <field name="priority">3</field>
+            <field name="time_days">0</field>
+            <field name="time_hours">2</field>
+            <field name="exclude_weekends">1</field>
+        </record>
+
+        <record id="helpdesk_sla_high" model="helpdesk.sla">
+            <field name="name">High Priority Resolution</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_resolved"/>
+            <field name="priority">2</field>
+            <field name="time_days">1</field>
+            <field name="time_hours">0</field>
+            <field name="exclude_weekends">1</field>
+        </record>
+
+        <record id="helpdesk_sla_normal" model="helpdesk.sla">
+            <field name="name">Standard Resolution</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_resolved"/>
+            <field name="priority">0</field>
+            <field name="time_days">3</field>
+            <field name="time_hours">0</field>
+            <field name="exclude_weekends">1</field>
+        </record>
+
+    </data>
+</odoo>

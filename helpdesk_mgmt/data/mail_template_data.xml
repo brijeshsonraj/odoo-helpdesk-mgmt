@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Email template: New Ticket Acknowledgment -->
+        <record id="mail_template_helpdesk_ticket_new" model="mail.template">
+            <field name="name">Helpdesk: Ticket Created</field>
+            <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+            <field name="subject">Ticket {{ object.number }} - {{ object.name }}</field>
+            <field name="email_from">{{ (object.team_id.leader_id.email or object.company_id.email or '') }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0; padding: 0; font-size: 13px;">
+                    <p style="margin: 0 0 16px 0;">Dear {{ object.partner_id.name or 'Customer' }},</p>
+                    <p style="margin: 0 0 16px 0;">
+                        Thank you for contacting us. Your support ticket has been created successfully.
+                    </p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold; width: 150px;">Ticket Number</td>
+                            <td style="padding: 8px;">{{ object.number }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">Subject</td>
+                            <td style="padding: 8px;">{{ object.name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">Team</td>
+                            <td style="padding: 8px;">{{ object.team_id.name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">Priority</td>
+                            <td style="padding: 8px;">{{ object.priority }}</td>
+                        </tr>
+                    </table>
+                    <p style="margin: 0 0 16px 0;">
+                        We will review your request and get back to you as soon as possible.
+                        You can track your ticket status through our customer portal.
+                    </p>
+                    <p style="margin: 0;">Best regards,<br/>{{ object.company_id.name }}</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!-- Email template: Ticket Resolved -->
+        <record id="mail_template_helpdesk_ticket_resolved" model="mail.template">
+            <field name="name">Helpdesk: Ticket Resolved</field>
+            <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+            <field name="subject">Ticket {{ object.number }} Resolved - {{ object.name }}</field>
+            <field name="email_from">{{ (object.user_id.email or object.company_id.email or '') }}</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0; padding: 0; font-size: 13px;">
+                    <p style="margin: 0 0 16px 0;">Dear {{ object.partner_id.name or 'Customer' }},</p>
+                    <p style="margin: 0 0 16px 0;">
+                        Your support ticket <strong>{{ object.number }}</strong> ({{ object.name }})
+                        has been resolved.
+                    </p>
+                    <p style="margin: 0 0 16px 0;">
+                        If you need further assistance or if this issue is not fully resolved,
+                        please reply to this email and we will reopen your ticket.
+                    </p>
+                    <p style="margin: 0 0 16px 0;">
+                        We would appreciate your feedback. Please rate your experience through the customer portal.
+                    </p>
+                    <p style="margin: 0;">Best regards,<br/>{{ object.user_id.name or object.company_id.name }}</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!-- Email template: SLA Breach Warning -->
+        <record id="mail_template_helpdesk_sla_warning" model="mail.template">
+            <field name="name">Helpdesk: SLA Breach Warning</field>
+            <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+            <field name="subject">[URGENT] SLA Deadline Approaching - {{ object.number }}</field>
+            <field name="email_from">{{ object.company_id.email }}</field>
+            <field name="email_to">{{ (object.user_id.email or object.team_id.leader_id.email or '') }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0; padding: 0; font-size: 13px;">
+                    <p style="margin: 0 0 16px 0; color: #e74c3c; font-weight: bold;">
+                        ⚠ SLA Deadline Approaching
+                    </p>
+                    <p style="margin: 0 0 16px 0;">
+                        Ticket <strong>{{ object.number }}</strong> is about to breach its SLA deadline.
+                    </p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">Subject</td>
+                            <td style="padding: 8px;">{{ object.name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">Customer</td>
+                            <td style="padding: 8px;">{{ object.partner_id.name or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">SLA Deadline</td>
+                            <td style="padding: 8px; color: #e74c3c;">{{ object.sla_deadline }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; background: #f0f0f0; font-weight: bold;">Assigned To</td>
+                            <td style="padding: 8px;">{{ object.user_id.name or 'Unassigned' }}</td>
+                        </tr>
+                    </table>
+                    <p style="margin: 0;">Please take immediate action.</p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

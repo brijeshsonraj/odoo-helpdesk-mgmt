@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Category Form -->
+    <record id="helpdesk_category_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.category.form</field>
+        <field name="model">helpdesk.category</field>
+        <field name="arch" type="xml">
+            <form string="Category">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-ticket"
+                                type="object" name="action_view_tickets"
+                                invisible="ticket_count == 0">
+                            <field name="ticket_count" string="Tickets" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_id"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Category description..."/>
+                    <field name="child_ids" string="Subcategories">
+                        <list>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Category List -->
+    <record id="helpdesk_category_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.category.tree</field>
+        <field name="model">helpdesk.category</field>
+        <field name="arch" type="xml">
+            <list string="Categories">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="ticket_count"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Category Action -->
+    <record id="helpdesk_category_action" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">helpdesk.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

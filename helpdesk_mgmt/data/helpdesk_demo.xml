@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Demo Tickets -->
+        <record id="helpdesk_ticket_demo_1" model="helpdesk.ticket">
+            <field name="name">Cannot log in to my account</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_new"/>
+            <field name="priority">2</field>
+            <field name="category_id" ref="helpdesk_category_technical"/>
+            <field name="tag_ids" eval="[(4, ref('helpdesk_tag_bug'))]"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="description">&lt;p&gt;I am unable to log in to my account. The page just shows an error message.&lt;/p&gt;</field>
+        </record>
+
+        <record id="helpdesk_ticket_demo_2" model="helpdesk.ticket">
+            <field name="name">Request for invoice copy</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_in_progress"/>
+            <field name="priority">0</field>
+            <field name="category_id" ref="helpdesk_category_billing"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="description">&lt;p&gt;Please send me a copy of my last invoice.&lt;/p&gt;</field>
+        </record>
+
+        <record id="helpdesk_ticket_demo_3" model="helpdesk.ticket">
+            <field name="name">Feature request: Dark mode</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_new"/>
+            <field name="priority">0</field>
+            <field name="category_id" ref="helpdesk_category_feature"/>
+            <field name="tag_ids" eval="[(4, ref('helpdesk_tag_improvement'))]"/>
+            <field name="description">&lt;p&gt;It would be great to have a dark mode option.&lt;/p&gt;</field>
+        </record>
+
+        <record id="helpdesk_ticket_demo_4" model="helpdesk.ticket">
+            <field name="name">System performance is slow</field>
+            <field name="team_id" ref="helpdesk_team_default"/>
+            <field name="stage_id" ref="helpdesk_stage_in_progress"/>
+            <field name="priority">3</field>
+            <field name="category_id" ref="helpdesk_category_technical"/>
+            <field name="tag_ids" eval="[(4, ref('helpdesk_tag_critical'))]"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="description">&lt;p&gt;The entire system is extremely slow since this morning. Urgent!&lt;/p&gt;</field>
+        </record>
+
+    </data>
+</odoo>

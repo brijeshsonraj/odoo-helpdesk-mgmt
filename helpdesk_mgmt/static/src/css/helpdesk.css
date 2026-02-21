@@ -1,0 +1,42 @@
+/* Helpdesk Management - Custom Styles */
+
+/* SLA Status Colors */
+.o_helpdesk_sla_failed {
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+.o_helpdesk_sla_warning {
+    color: #ffc107 !important;
+    font-weight: bold;
+}
+
+.o_helpdesk_sla_ok {
+    color: #28a745 !important;
+}
+
+/* Dashboard Team Cards */
+.o_kanban_dashboard .o_kanban_record {
+    border-left: 4px solid #875a7b;
+}
+
+.o_kanban_dashboard .o_kanban_record:hover {
+    border-left-color: #7c7bad;
+}
+
+/* Priority badges in list */
+.o_helpdesk_priority_urgent {
+    background-color: #dc3545;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.o_helpdesk_priority_high {
+    background-color: #fd7e14;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}

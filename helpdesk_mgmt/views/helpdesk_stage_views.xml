@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Stage Form -->
+    <record id="helpdesk_stage_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.stage.form</field>
+        <field name="model">helpdesk.stage</field>
+        <field name="arch" type="xml">
+            <form string="Stage">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="fold"/>
+                            <field name="is_close"/>
+                        </group>
+                        <group>
+                            <field name="team_ids" widget="many2many_tags"/>
+                            <field name="template_id"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Stage description..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Stage List -->
+    <record id="helpdesk_stage_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.stage.tree</field>
+        <field name="model">helpdesk.stage</field>
+        <field name="arch" type="xml">
+            <list string="Stages" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="fold"/>
+                <field name="is_close"/>
+                <field name="team_ids" widget="many2many_tags"/>
+                <field name="template_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Stage Action -->
+    <record id="helpdesk_stage_action" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="res_model">helpdesk.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

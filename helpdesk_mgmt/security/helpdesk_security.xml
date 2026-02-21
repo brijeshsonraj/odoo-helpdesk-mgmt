@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!--                   HELPDESK SECURITY GROUPS                    -->
+    <!-- ============================================================ -->
+
+    <record model="ir.module.category" id="module_category_helpdesk">
+        <field name="name">Helpdesk</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record model="res.groups.privilege" id="res_groups_privilege_helpdesk">
+        <field name="name">Helpdesk</field>
+        <field name="sequence">10</field>
+        <field name="category_id" ref="module_category_helpdesk"/>
+    </record>
+
+    <record id="group_helpdesk_user" model="res.groups">
+        <field name="name">Agent</field>
+        <field name="comment">Helpdesk agent who can manage tickets assigned to them</field>
+        <field name="sequence">10</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="privilege_id" ref="res_groups_privilege_helpdesk"/>
+    </record>
+
+    <record id="group_helpdesk_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="comment">Helpdesk manager with full access to teams, SLAs, and all tickets</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="res_groups_privilege_helpdesk"/>
+        <field name="implied_ids" eval="[(4, ref('helpdesk_mgmt.group_helpdesk_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!--                   RECORD RULES                               -->
+    <!-- ============================================================ -->
+
+    <!-- Tickets: agents see tickets from their teams -->
+    <record id="helpdesk_ticket_rule_agent" model="ir.rule">
+        <field name="name">Helpdesk Ticket: Agent (team member)</field>
+        <field name="model_id" ref="model_helpdesk_ticket"/>
+        <field name="domain_force">[
+            '|',
+            ('team_id.member_ids', 'in', [user.id]),
+            ('user_id', '=', user.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('group_helpdesk_user'))]"/>
+    </record>
+
+    <!-- Tickets: managers see all -->
+    <record id="helpdesk_ticket_rule_manager" model="ir.rule">
+        <field name="name">Helpdesk Ticket: Manager (all)</field>
+        <field name="model_id" ref="model_helpdesk_ticket"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_helpdesk_manager'))]"/>
+    </record>
+
+    <!-- Tickets: portal users see only their own tickets -->
+    <record id="helpdesk_ticket_rule_portal" model="ir.rule">
+        <field name="name">Helpdesk Ticket: Portal (own)</field>
+        <field name="model_id" ref="model_helpdesk_ticket"/>
+        <field name="domain_force">[('partner_id', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <!-- Multi-company rule -->
+    <record id="helpdesk_ticket_rule_company" model="ir.rule">
+        <field name="name">Helpdesk Ticket: Company</field>
+        <field name="model_id" ref="model_helpdesk_ticket"/>
+        <field name="domain_force">[
+            '|',
+            ('company_id', '=', False),
+            ('company_id', 'in', company_ids)
+        ]</field>
+    </record>
+
+    <record id="helpdesk_team_rule_company" model="ir.rule">
+        <field name="name">Helpdesk Team: Company</field>
+        <field name="model_id" ref="model_helpdesk_team"/>
+        <field name="domain_force">[
+            '|',
+            ('company_id', '=', False),
+            ('company_id', 'in', company_ids)
+        ]</field>
+    </record>
+
+</odoo>

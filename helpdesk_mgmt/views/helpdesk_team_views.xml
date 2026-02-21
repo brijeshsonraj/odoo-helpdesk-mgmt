@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!--                   TEAM VIEWS                                 -->
+    <!-- ============================================================ -->
+
+    <!-- Kanban View -->
+    <record id="helpdesk_team_view_kanban" model="ir.ui.view">
+        <field name="name">helpdesk.team.kanban</field>
+        <field name="model">helpdesk.team</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard" create="1">
+                <field name="name"/>
+                <field name="color"/>
+                <field name="ticket_count"/>
+                <field name="ticket_closed_count"/>
+                <field name="ticket_unassigned_count"/>
+                <field name="sla_failed_count"/>
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <aside>
+                            <field name="color" widget="color_picker"/>
+                        </aside>
+                        <main>
+                            <field name="name" class="fw-bold fs-4"/>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button name="action_view_tickets" type="object"
+                                            class="btn btn-primary">
+                                        <field name="ticket_count"/>
+                                        <span> Open Tickets</span>
+                                    </button>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <span class="badge text-bg-danger" t-if="record.sla_failed_count.raw_value > 0">
+                                        <field name="sla_failed_count"/> SLA Failed
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-2 text-muted small">
+                                <div class="col-6">
+                                    <i class="fa fa-user-times"/> <field name="ticket_unassigned_count"/> Unassigned
+                                </div>
+                                <div class="col-6 text-end">
+                                    <i class="fa fa-check"/> <field name="ticket_closed_count"/> Closed
+                                </div>
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="helpdesk_team_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.team.form</field>
+        <field name="model">helpdesk.team</field>
+        <field name="arch" type="xml">
+            <form string="Team">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_tickets" type="object"
+                                class="oe_stat_button" icon="fa-life-ring">
+                            <field name="ticket_count" string="Tickets" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Team name..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="left">
+                            <field name="leader_id" widget="many2one_avatar_user"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="description"/>
+                        </group>
+                        <group name="right">
+                            <field name="assignment_method"/>
+                            <field name="use_sla"/>
+                            <field name="use_rating"/>
+                            <field name="use_timesheet"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Members" name="members">
+                            <field name="member_ids" widget="many2many_tags"
+                                   options="{'color_field': 'color'}">
+                            </field>
+                        </page>
+                        <page string="Stages" name="stages">
+                            <field name="stage_ids">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="fold"/>
+                                    <field name="is_close"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Email Alias" name="alias">
+                            <group>
+                                <field name="alias_id" readonly="1"/>
+                            </group>
+                            <p class="text-muted">
+                                Incoming emails to this alias will automatically create support tickets in this team.
+                            </p>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="helpdesk_team_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.team.tree</field>
+        <field name="model">helpdesk.team</field>
+        <field name="arch" type="xml">
+            <list string="Teams">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="leader_id" widget="many2one_avatar_user"/>
+                <field name="assignment_method"/>
+                <field name="ticket_count" string="Open Tickets"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="helpdesk_team_action" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="res_model">helpdesk.team</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Helpdesk team!
+            </p>
+            <p>
+                Organize your agents into teams to handle different types of support requests.
+            </p>
+        </field>
+    </record>
+
+</odoo>
