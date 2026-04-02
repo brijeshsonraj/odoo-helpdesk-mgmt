@@ -64,7 +64,7 @@ A comprehensive, Enterprise-grade **Helpdesk & Customer Support Ticket Managemen
 
 ## Installation
 
-1. Copy the `helpdesk_mgmt` folder into your Odoo addons directory
+1. Copy the `bs_helpdesk_mgmt` folder into your Odoo addons directory
 2. Restart the Odoo server
 3. Go to Apps → Update Apps List
 4. Search for "Helpdesk Management" and install

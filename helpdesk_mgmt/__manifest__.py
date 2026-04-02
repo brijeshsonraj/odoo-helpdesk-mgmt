@@ -27,7 +27,7 @@ Key Features:
     'website': 'https://sonrajbrijesh.com',   # TODO: replace with your real website
     'support': 'sonrajbrijesh@gmail.com',   # TODO: replace with your support email
     # --- Odoo Apps pricing (remove 'price'/'currency' for a free module) ---
-    'price': 99.00,
+    'price': 55.00,
     'currency': 'EUR',
     'depends': [
         'base',
@@ -64,7 +64,7 @@ Key Features:
     'license': 'LGPL-3',
     'assets': {
         'web.assets_backend': [
-            'helpdesk_mgmt/static/src/css/helpdesk.css',
+            'bs_helpdesk_mgmt/static/src/css/helpdesk.css',
         ],
     },
 }

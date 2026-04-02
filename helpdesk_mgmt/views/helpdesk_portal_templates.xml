@@ -11,7 +11,7 @@
               customize_show="True" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
             <t t-call="portal.portal_docs_entry">
-                <t t-set="icon" t-value="'/helpdesk_mgmt/static/description/icon.svg'"/>
+                <t t-set="icon" t-value="'/bs_helpdesk_mgmt/static/description/icon.svg'"/>
                 <t t-set="title">Tickets</t>
                 <t t-set="url" t-value="'/my/tickets'"/>
                 <t t-set="text">View and manage your support tickets</t>
@@ -89,7 +89,7 @@
     <!-- Portal: Single Ticket Detail Page -->
     <template id="portal_my_ticket" name="My Ticket">
         <t t-call="portal.portal_layout">
-            <t t-set="o_portal_fullwidth_alert" groups="helpdesk_mgmt.group_helpdesk_user">
+            <t t-set="o_portal_fullwidth_alert" groups="bs_helpdesk_mgmt.group_helpdesk_user">
                 <t t-call="portal.portal_back_in_edit_mode">
                     <t t-set="backend_url" t-value="'/odoo/helpdesk/' + str(ticket.id)"/>
                 </t>

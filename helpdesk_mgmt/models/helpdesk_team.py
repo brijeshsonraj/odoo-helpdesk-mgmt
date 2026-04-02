@@ -108,7 +108,7 @@ class HelpdeskTeam(models.Model):
 
     def action_view_tickets(self):
         self.ensure_one()
-        action = self.env['ir.actions.act_window']._for_xml_id('helpdesk_mgmt.helpdesk_ticket_action')
+        action = self.env['ir.actions.act_window']._for_xml_id('bs_helpdesk_mgmt.helpdesk_ticket_action')
         action['domain'] = [('team_id', '=', self.id)]
         action['context'] = {'default_team_id': self.id}
         return action

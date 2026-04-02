@@ -5,7 +5,7 @@
         <!-- Email template: New Ticket Acknowledgment -->
         <record id="mail_template_helpdesk_ticket_new" model="mail.template">
             <field name="name">Helpdesk: Ticket Created</field>
-            <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+            <field name="model_id" ref="bs_helpdesk_mgmt.model_helpdesk_ticket"/>
             <field name="subject">Ticket {{ object.number }} - {{ object.name }}</field>
             <field name="email_from">{{ (object.team_id.leader_id.email or object.company_id.email or '') }}</field>
             <field name="email_to">{{ object.partner_email }}</field>
@@ -47,7 +47,7 @@
         <!-- Email template: Ticket Resolved -->
         <record id="mail_template_helpdesk_ticket_resolved" model="mail.template">
             <field name="name">Helpdesk: Ticket Resolved</field>
-            <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+            <field name="model_id" ref="bs_helpdesk_mgmt.model_helpdesk_ticket"/>
             <field name="subject">Ticket {{ object.number }} Resolved - {{ object.name }}</field>
             <field name="email_from">{{ (object.user_id.email or object.company_id.email or '') }}</field>
             <field name="email_to">{{ object.partner_email }}</field>
@@ -75,7 +75,7 @@
         <!-- Email template: SLA Breach Warning -->
         <record id="mail_template_helpdesk_sla_warning" model="mail.template">
             <field name="name">Helpdesk: SLA Breach Warning</field>
-            <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+            <field name="model_id" ref="bs_helpdesk_mgmt.model_helpdesk_ticket"/>
             <field name="subject">[URGENT] SLA Deadline Approaching - {{ object.number }}</field>
             <field name="email_from">{{ object.company_id.email }}</field>
             <field name="email_to">{{ (object.user_id.email or object.team_id.leader_id.email or '') }}</field>

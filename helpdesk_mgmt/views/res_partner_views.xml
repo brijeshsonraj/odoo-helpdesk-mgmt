@@ -11,7 +11,7 @@
                 <button name="action_view_helpdesk_tickets" type="object"
                         class="oe_stat_button" icon="fa-life-ring"
                         invisible="helpdesk_ticket_count == 0"
-                        groups="helpdesk_mgmt.group_helpdesk_user">
+                        groups="bs_helpdesk_mgmt.group_helpdesk_user">
                     <field name="helpdesk_ticket_count" string="Tickets" widget="statinfo"/>
                 </button>
             </xpath>

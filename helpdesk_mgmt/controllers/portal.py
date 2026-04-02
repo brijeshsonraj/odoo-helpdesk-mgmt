@@ -31,7 +31,7 @@ class HelpdeskPortal(CustomerPortal):
             'page_name': 'tickets',
             'default_url': '/my/tickets',
         }
-        return request.render('helpdesk_mgmt.portal_my_tickets', values)
+        return request.render('bs_helpdesk_mgmt.portal_my_tickets', values)
 
     @http.route('/my/tickets/<int:ticket_id>', type='http', auth='user', website=True)
     def portal_my_ticket(self, ticket_id, **kw):
@@ -42,7 +42,7 @@ class HelpdeskPortal(CustomerPortal):
             'ticket': ticket,
             'page_name': 'ticket',
         }
-        return request.render('helpdesk_mgmt.portal_my_ticket', values)
+        return request.render('bs_helpdesk_mgmt.portal_my_ticket', values)
 
     @http.route('/my/tickets/new', type='http', auth='user', website=True)
     def portal_new_ticket(self, **kw):
@@ -51,7 +51,7 @@ class HelpdeskPortal(CustomerPortal):
             'categories': categories,
             'page_name': 'new_ticket',
         }
-        return request.render('helpdesk_mgmt.portal_create_ticket', values)
+        return request.render('bs_helpdesk_mgmt.portal_create_ticket', values)
 
     @http.route('/my/tickets/submit', type='http', auth='user',
                 website=True, methods=['POST'], csrf=True)

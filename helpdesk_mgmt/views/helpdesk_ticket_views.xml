@@ -11,7 +11,7 @@
         <field name="model">helpdesk.ticket</field>
         <field name="arch" type="xml">
             <kanban default_group_by="stage_id" class="o_kanban_small_column"
-                    quick_create_view="helpdesk_mgmt.helpdesk_ticket_view_form_quick_create"
+                    quick_create_view="bs_helpdesk_mgmt.helpdesk_ticket_view_form_quick_create"
                     sample="1">
                 <field name="stage_id"/>
                 <field name="user_id"/>

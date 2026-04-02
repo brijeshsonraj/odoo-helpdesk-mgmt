@@ -7,9 +7,9 @@
 
     <menuitem id="helpdesk_menu_root"
               name="Helpdesk"
-              web_icon="helpdesk_mgmt,static/description/icon.png"
+              web_icon="bs_helpdesk_mgmt,static/description/icon.png"
               sequence="55"
-              groups="helpdesk_mgmt.group_helpdesk_user"/>
+              groups="bs_helpdesk_mgmt.group_helpdesk_user"/>
 
     <!-- ============================================================ -->
     <!--                   FIRST-LEVEL MENUS                          -->
@@ -24,13 +24,13 @@
               name="Reporting"
               parent="helpdesk_menu_root"
               sequence="10"
-              groups="helpdesk_mgmt.group_helpdesk_manager"/>
+              groups="bs_helpdesk_mgmt.group_helpdesk_manager"/>
 
     <menuitem id="helpdesk_menu_config"
               name="Configuration"
               parent="helpdesk_menu_root"
               sequence="20"
-              groups="helpdesk_mgmt.group_helpdesk_manager"/>
+              groups="bs_helpdesk_mgmt.group_helpdesk_manager"/>
 
     <!-- ============================================================ -->
     <!--                   HELPDESK SUB-MENUS                         -->

@@ -32,7 +32,7 @@
         <field name="res_model">helpdesk.ticket.merge</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-        <field name="binding_model_id" ref="helpdesk_mgmt.model_helpdesk_ticket"/>
+        <field name="binding_model_id" ref="bs_helpdesk_mgmt.model_helpdesk_ticket"/>
         <field name="binding_view_types">list</field>
     </record>
 
