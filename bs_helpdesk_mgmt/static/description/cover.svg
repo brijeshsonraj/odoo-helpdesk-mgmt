@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#f5f2fb"/>
+      <stop offset="1" stop-color="#e8f7fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#g)"/>
+  <g transform="translate(80,80)">
+    <rect x="0" y="0" width="1040" height="440" rx="12" ry="12" fill="#fff" stroke="#e1e7ee"/>
+    <text x="40" y="80" font-family="Arial, Helvetica, sans-serif" font-size="46" fill="#5c3b63">Helpdesk Management</text>
+    <text x="40" y="130" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#6b6b6b">Full-featured helpdesk ticketing, SLA and customer portal for Odoo 19</text>
+    <g transform="translate(40,180)">
+      <rect width="440" height="260" rx="6" fill="#f6fbff" stroke="#cfeaf7"/>
+      <text x="24" y="40" font-family="Arial" font-size="18" fill="#2b6f91">Kanban view</text>
+    </g>
+    <g transform="translate(520,180)">
+      <rect width="460" height="120" rx="6" fill="#fff7f8" stroke="#f2dbe0"/>
+      <text x="24" y="40" font-family="Arial" font-size="18" fill="#8b3b49">Dashboard</text>
+      <rect x="24" y="64" width="120" height="40" rx="4" fill="#8b3b49"/>
+    </g>
+  </g>
+</svg>
